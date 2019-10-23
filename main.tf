@@ -8,29 +8,14 @@ resource "azurerm_key_vault" "vault" {
     name = "standard"
   }
 
-  access_policy {
-    tenant_id = "${var.tenant_id}"
-    object_id = "${var.keyvault_admin_id}"
-
-    key_permissions = [
-      "create",
-      "get",
-      "list",
-      "wrapKey",
-      "sign",
-      "verify",
-      "restore",
-      "unwrapKey"
-    ]
-
-    secret_permissions = [
-      "get",
-      "set",
-      "list",
-      "backup",
-      "restore",
-      "delete"
-    ]
+  dynamic "access_policy" {
+    for_each = "${var.access_policy}"
+    content {
+      tenant_id          = "${access_policy.value.tenant_id}"
+      object_id          = "${access_policy.value.object_id}"
+      key_permissions    = "${access_policy.value.key_permissions}"
+      secret_permissions = "${access_policy.value.secret_permissions}"
+    }
   }
 }
 
