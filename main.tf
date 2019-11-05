@@ -15,6 +15,7 @@ resource "azurerm_key_vault" "vault" {
       object_id          = "${access_policy.value.object_id}"
       key_permissions    = "${access_policy.value.key_permissions}"
       secret_permissions = "${access_policy.value.secret_permissions}"
+      certificate_permissions = "${access_policy.value.certificate_permissions}"
     }
   }
 }
