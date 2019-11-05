@@ -12,6 +12,7 @@ variable "access_policy" {
     object_id          = string
     key_permissions    = list(string)
     secret_permissions = list(string)
+    certificate_permissions = list(string)
   }))
   default = []
 }
