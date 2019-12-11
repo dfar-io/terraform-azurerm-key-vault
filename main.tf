@@ -4,9 +4,7 @@ resource "azurerm_key_vault" "vault" {
   resource_group_name = var.rg_name
   tenant_id           = var.tenant_id
 
-  sku {
-    name = "standard"
-  }
+  sku_name = "standard"
 
   dynamic "access_policy" {
     for_each = var.access_policy
